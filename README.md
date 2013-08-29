@@ -51,13 +51,11 @@ window.RiftThree([renderer[, options]]);
 ```
 
 ## 3D Texture Support
-You can use the following types of stereoscopic images:
-- Side-by-Side/Top-and-Bottom
-- Depth maps
-- Side-by-Side + Depth map
-- Panoramas
-
-See examples soon at `examples/MediaPlayer/index.html`
+You can use the following types of stereoscopic images or videos:
+- [Side-by-Side/Top-and-Bottom](http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/index.html#3)
+- [Depth maps](http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/index.html#1)
+- [Side-by-Side + Depth map](http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/index.html#2)
+- [Panoramas](http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/index.html#0)
 
 ## Issues
 - Why is switching UV mapping set faster than switching texcoords in shader?
