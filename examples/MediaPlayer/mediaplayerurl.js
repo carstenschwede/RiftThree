@@ -171,7 +171,7 @@ $(document.body).bind('drop', function(e) {
 							_panoLoader.load(latlng);
 						}
 						var address = params.address;
-						var isAddressLatLng = address.match(/(\d+\.\d+)\s*,\s*(\d+\.\d+)/);
+						var isAddressLatLng = address.match(/(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)/);
 						var latlng;
 						if (isAddressLatLng) {
 							latlng = new google.maps.LatLng(isAddressLatLng[1],isAddressLatLng[2]);
