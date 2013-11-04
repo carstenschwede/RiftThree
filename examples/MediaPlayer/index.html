@@ -11,84 +11,18 @@
 		<script src="../../dep/three.js/Detector.js"></script>
 		<script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
 		<script src="../../lib/RiftThree.js"></script>
+
+
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
+    <script src="../../../Playground/GSVPanoDepth.js/examples/js/jquery.base64.min.js" type="text/javascript"></script>
+    <script src="../../../Playground/GSVPanoDepth.js/examples/js/zpipe.min.js" type="text/javascript"></script>
+    <script src="../../../Playground/GSVPanoDepth.js/examples/js/GSVPano.js" type="text/javascript"></script>
+    <script src="../../../Playground/GSVPanoDepth.js/src/GSVPanoDepth.js" type="text/javascript"></script>
+    <script src="../../dep/jQuery/purl.js" type="text/javascript"></script>
+
+
 	</head>
 	<body>
-
-		<!--
-			***************************************************************
-			2D Image 360 Degree
-			***************************************************************
-		-->
-		<img class="riftmedia" data-stereotype="360L" src="./Media/grid_360L.jpg"/>
-
-		<!--
-			***************************************************************
-			360 Degree Video
-			***************************************************************
-			<-- Take a look at the videos from http://freedom360.us/
-			<video class="riftmedia" data-stereotype="360L">
-				<source src="your-360-degree-video.mp4"/>
-			</video>
-		-->
-
-
-		<!--
-			***************************************************************
-			Depthmap
-			***************************************************************
-		-->
-		<img class="riftmedia" data-stereotype="D" src="./Media/checkerboard_D.png"/>
-
-
-		<!--
-			***************************************************************
-			2D Image + Depthmap
-			***************************************************************
-			Image from http://www.youtube.com/watch?v=PjAqtI7pqBM, 3D Photo using Depth Maps
-		-->
-		<img class="riftmedia" data-stereotype="L_D" data-ar="3.0" src="./Media/street_L_D.png"/>
-
-
-
-		<!--
-			***************************************************************
-			3D SBS Image
-			***************************************************************
-		-->
-		<!--Stereoscopic cube from http://ni0n.deviantart.com/art/Stereoscopic-Cube-129022791-->
-		<img class="riftmedia" data-stereotype="LR" src="./Media/Cube_LR.jpg"/>
-
-
-
-		<!--
-			***************************************************************
-			3D Video SBS
-			***************************************************************
-			<video class="riftmedia" data-stereotype="LR" data-ar="1.77">
-				<source src="your_sbs_video_file.mp4"/>
-			</video>
-		-->
-
-
-		<!--
-			***************************************************************
-			3D Video TAB
-			***************************************************************
-			<video class="riftmedia" data-stereotype="L_R" data-ar="1.77">
-				<source src="your_tab_video_file.mp4"/>
-			</video>
-		-->
-
-		<!--
-			***************************************************************
-			3D Video SBS+Depthmap, but only use Left (!L)
-			***************************************************************
-			<video class="riftmedia" data-stereotype="LRD!L" data-displacement="600">
-				<source src="your-sbs-video-file-with-depth.mp4" type="video/mp4"/>
-			</video>
-		-->
-
-
-		<script src="mediaplayer.js"></script>
+		<script src="mediaplayerurl.js"></script>
 	</body>
 </html>
