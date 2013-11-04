@@ -85,13 +85,37 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 					});
 					media.play();
 				} else {
-					texture = new THREE.ImageUtils.loadTexture(media.getAttribute("src"),false,function() {
-						onMediaLoaded({
-							width: media.width,
-							height: media.height,
-							duration: 0
+
+					var src = media.getAttribute("src");
+					if (src) {
+						texture = new THREE.ImageUtils.loadTexture(src,false,function() {
+							onMediaLoaded({
+								width: media.width,
+								height: media.height,
+								duration: 0
+							});
 						});
-					});
+					}
+					var address = media.getAttribute("data-address");
+					if (address ) {
+						var lat = address.split(", ")[0];
+						var lng = address.split(", ")[1];
+						var _panoLoader = new GSVPANO.PanoLoader({zoom: 3});
+
+						_panoLoader.onPanoramaLoad = function() {
+
+							texture = new THREE.Texture(_panoLoader.canvas);
+							texture.needsUpdate = true;
+
+							onMediaLoaded({
+								width: _panoLoader.canvas.width,
+								height: _panoLoader.canvas.height,
+								duration: 0
+							});
+						};
+
+						_panoLoader.load(new google.maps.LatLng(lat,lng));
+					};
 				}
 
 				function onMediaLoaded(properties) {
@@ -149,7 +173,7 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 					};
 
 					geometrySize.height = Math.floor(geometrySize.width/ar);
-					console.log(geometrySize,properties,pixelSize);
+					//console.log(geometrySize,properties,pixelSize);
 					/*********************************************/
 					//Calculate number of segments to display image
 					/*********************************************/
@@ -167,6 +191,7 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 					switch(stereoType.geometry.toLowerCase()) {
 						case "sphere":
 							geometry = new THREE.SphereGeometry( 1500, 64, 64 );
+
 							camera.position.x = camera.position.y = camera.position.z = 0;
 							break;
 						case "plane":
