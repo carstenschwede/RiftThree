@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Oculus Rift 3D Video</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false&key=AIzaSyC20oOkY5oUOu9IxdTfFP4zP4s0ibe9qQI"></script>
+
+		<style>
+			html,body {
+				margin:0;padding:0;
+			}
+
+			body {
+				margin:50px;
+				text-align:center;
+				background:#444;
+				color:white;
+				font-family:Tahoma,sans-serif;
+
+			}
+
+			a,a:link,a:visited {
+				text-decoration: none;
+				color:white;
+				font-weight:bold;
+			}
+
+
+			.pano {
+				position:relative;
+				float :left;
+
+			}
+			.pano img {
+				margin: 10px;
+				width:200px;
+				height:100px;
+				border:10px solid white;
+				border-bottom:30px solid white;
+				box-shadow:0px 0px 5px 5px #000;
+			}
+
+			.pano div {
+				text-decoration:none;
+				color: #000;
+				font-weight:bold;
+				position:absolute;
+				font-size:15px;
+				height:20px;
+				line-height:15px;
+				font-family: Tahoma, sans-serif;
+				left:0;
+				bottom:18px;
+
+				text-align:center;
+				width:100%;
+				overflow: hidden;
+				white-space: nowrap;
+				text-transform:capitalize;
+			}
+
+		</style>
+	<script>
+		var links = {
+		"Simple Panorama": {
+			filetype: "IMG",
+			stereotype: "360L",
+			src: "http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/Media/grid_360L.jpg"
+		},
+		"DepthMap": {
+			filetype:"IMG",
+			stereotype: "D",
+			src: "http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/Media/checkerboard_D.png"
+		},
+		"Image+Depthmap": {
+			filetype:"IMG",
+			stereotype: "L_D",
+			src: "http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/Media/street_L_D.png"
+		},
+		"Simple SBS": {
+			filetype:"IMG",
+			stereotype:"LR",
+			src: "http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/Media/Cube_LR.jpg"
+		},
+		"Simple TaB": {
+			filetype:"IMG",
+			stereotype:"L_R",
+			src: "http://images.eurogamer.net/articles//a/1/3/0/4/5/7/0/New_3D_Right.jpg.jpg"
+		},
+		"Manhattan": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [40.7587,-73.98535600000002]
+		},
+
+			"under the sea turtle":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-23.442896,151.90658400000007]},
+		"under the sea":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [20.634702,-156.497456]},
+		"lombard street sf":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [37.802167,-122.41844700000001]},
+		"colloseum rom":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [41.890072,12.492533999999978]},
+		"grand canyon":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [36.066918,-112.13600300000002]},
+		"Royal botanical gardens,london":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [51.474629,-0.29483200000004217]},
+		"grand canyon":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [36.100943,-112.089338]},
+		"Antarctica":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-85.00001,-54.15079800000001]},
+		"windmills":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [51.882242,4.642720000000054]},
+		"eiffel tower": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [48.85896,2.2933930000000373]},
+		"flying saucer":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [32.89838,-96.299882]},
+		"giant chicken":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [40.457349,-80.009345]},
+		"birdmen":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [35.704074,139.55773200000002]},
+		"donkey": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-23.527516,24.722529]},
+		"antarctica": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-84.999999,-44.656316]},
+		"amazon rainforest": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-3.137768,-60.493357]},
+		"cern":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [46.309863,6.076324]},
+		"christ the redeemr": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-22.951822,-43.210365]},
+		"burj kalifa":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [25.197184,55.274378]},
+		"burj kalifa downtown":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [25.195104,55.276175]},
+		"lwinenbrücke nepal":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [27.718398,86.716]},
+		"a380 cockpit":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [25.242917,55.372104]},
+		"a380 lounge":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [25.242656,55.371904]},
+		"pompeij":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [40.7517,14.494312]},
+		"stonehenge":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [51.179197,-1.825302]},
+		"endeavour space shuttle":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [28.586249,-80.651195]},
+		"nasa launch pad 39a":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [28.608495,-80.603791]},
+		"hawaii waimea bay":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [21.638919,-158.063575]},
+		"four seasons resort hualalai":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [19.829169,-155.991573]},
+		"westin kaanapali ocean resort vilage":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [20.937943,-156.692388]},
+		"Top of 7th Heaven":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [50.091726,-122.885021]},
+		"university of san diego":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [32.771863,-117.189993]},
+		"University of Glasgow":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [55.871655,-4.289143]},
+		"Rio Negro - Boats, amazonas": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-2.828941,-60.744552]},
+		"Sölden":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [46.94888,10.964252]},
+		"Amazon rainforest": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-2.945071,-60.676237]},
+		"Rio Negro": {
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [-3.137768,-60.493357]},
+		"Lago Bianco":{
+			filetype: "STREETVIEW",
+			stereotype: "360L",
+			address: [46.414382,10.013988]}
+		};
+
+		$(function() {
+			Object.keys(links).forEach(function(name) {
+				var info = links[name];
+				var src = "http://carstenschwede.github.io/RiftThree/examples/MediaPlayer/index.html?";
+
+				Object.keys(info).forEach(function(key) {
+					src+="&" + key + "=" + encodeURIComponent(info[key]);
+				});
+
+				var link = $("<a>").attr("target","_blank").attr("class","pano").attr("href",src).appendTo(document.body);
+				var imgSrc = info.src || "http://t1.gstatic.com/images?q=tbn:ANd9GcQHhpPhDRv3eDgFG1C9TnD1tLST0ECRF3yrJQSxOH01PUPeRIncyEt0Piu6";
+				if (info.address)
+					imgSrc = "http://maps.googleapis.com/maps/api/streetview?size=200x100&location="+info.address[0]+",%20"+info.address[1]+"&fov=90&heading=120&pitch=10&sensor=false&key=AIzaSyC20oOkY5oUOu9IxdTfFP4zP4s0ibe9qQI"
+
+				var img = $("<img>").attr("src",imgSrc).appendTo(link);
+
+				var label = $('<div>').text(name).appendTo(link);
+			});
+		});
+
+	</script>
+</head>
+<body>
+	Uses <a href="http://github.com/carstenschwede/RiftThree" target="_blank">http://github.com/carstenschwede/RiftThree</a><br/>
+
+
+</body>
+</html>
